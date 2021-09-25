@@ -1,0 +1,370 @@
+@mixin pad{
+  @media (max-width: 767px){
+    @content ;
+  }
+};
+
+@mixin mobile{
+  @media (max-width: 375px){
+    @content ;
+  }
+};
+
+*, *::before, *::after{
+  box-sizing:border-box;
+}
+a{
+  text-decoration:none;
+}
+
+.bg{
+  background-image: url(https://hexschool.github.io/js-filter/assets/bg.jpg);
+  background-position: center;
+  background-repeat: repeat;
+  background-size: cover;
+
+}
+
+.container{
+  width: 80%;
+  margin: 0 auto;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.logo{
+  margin-bottom: 24px;
+  a{
+    display: block;
+    background-image: url(https://firebasestorage.googleapis.com/v0/b/hexschool-courses.appspot.com/o/course%2FJS%20%E5%89%8D%E7%AB%AF%E4%BF%AE%E7%B7%B4%E5%85%A8%E6%94%BB%E7%95%A5%2F1628942714013-logo%20%E6%94%B9.png?alt=media&token=583e78ed-6a6c-4660-9f0e-2f59f8eb78e2);
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 439px;
+    height: 105px;
+    
+    @include pad{
+      background-image: url(https://firebasestorage.googleapis.com/v0/b/hexschool-courses.appspot.com/o/course%2FJS%20%E5%89%8D%E7%AB%AF%E4%BF%AE%E7%B7%B4%E5%85%A8%E6%94%BB%E7%95%A5%2F1629001163643-logo-sm.png?alt=media&token=914f40fc-c143-4aaa-a1c3-fb0bdd17fa9c);
+      width: 178px;
+      height: 34px;
+      
+      margin: 0 auto;
+    }
+  }
+}
+
+.content-container{
+  padding: 40px;
+  margin-bottom: 50px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 0 3px #F8D45A, 0 0 0 8px #FFFCEF, 0 2px 20px 0 rgba(0,0,0,0.15);
+  height: 600px;
+  
+  @include pad{
+    padding-top: 16px;
+    padding-bottom: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin-bottom: 16px;
+    
+    height: calc(100vh - 174px);
+  }
+}
+
+.btn-group{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: NotoSansCJKtc-Bold;
+  font-weight: 600;
+  margin-bottom: 20px;
+  
+  @include mobile {
+    margin-bottom: 8px;
+  }
+  .active{
+     background-color: #F8D45A;
+  }
+  a{
+    display: block;
+    color: #2A2A2A;
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 12.6%;
+    
+    border: 2px solid #2A2A2A;
+    box-shadow: 0 1px 0 0 #2A2A2A;
+    border-radius: 4px;
+    
+    @include pad{
+      width: 28%;
+    }
+    @include mobile{
+      width: 28%;
+    }
+    &:hover{
+      background-color: #F8D45A;
+    }
+  }
+}
+
+.input-group{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: NotoSansCJKtc-Bold;
+  font-weight: 600;
+  margin-bottom: 32px;
+  
+  @include pad{
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+}
+
+.input-content{
+  display: flex;
+  flex-wrap: nowarp;
+  background-color: #899E39;
+  border: 2px solid #899E39;
+  border-radius: 4px;
+  margin-right: 24px;
+  
+  @include pad{
+    width: 100%;
+    margin-right: 0;
+    margin-bottom:8px;
+  }
+  
+  label{
+    background-color: #899E39;
+    color: #fff;
+    border: 0px solid #899E39;
+    padding: 8px;
+    text-align: center;
+    
+    @include pad{
+      white-space: nowrap;
+      width: 28%;
+    }
+
+
+  }
+  input{
+    border: 0px solid transparent;
+    padding-left: 0.5rem;
+    @include pad{
+    width: 72%;
+  }
+    &:focus,:active{
+      outline: none;
+    }
+  }
+}
+
+.input-btn{
+  background: #899E39;
+  border: 2px solid #899E39;
+  border-radius: 4px;
+  color: #fff;
+  padding: 8px;
+  width: 15%;
+  display: block;
+  text-align: center;
+  opacity: .7;
+  transition: all .15s ease-out;
+  pointer-events: none;
+
+  @include pad{
+    width: 100%;
+  }
+}
+.btn-active{
+  opacity: 1;
+  pointer-events: auto;
+  transition: all .15s ease-in;
+}
+
+.result-group{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  
+  p{
+    font-family: NotoSansCJKtc-Bold;
+    font-size: 18px;
+    color: #2A2A2A;
+    letter-spacing: 1.12px;
+    font-weight: 600;
+    
+    @include pad{
+    padding-left: 8px;
+  }
+  }
+}
+
+.select-group{
+  border: 1px solid #9A9A9A;
+  border-radius: 4px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.table-group{
+  width: 100%;
+
+  td, th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  
+  th{
+    width: 14%;
+  }
+  
+  tbody{
+    text-align: center;
+    color: #2A2A2A;
+    
+    tr{ 
+      border-bottom: 2px solid #D9D9D9;
+      &:hover{
+        background-color: #F4F1EA;
+      }
+    }
+    @include pad{
+     font-family: NotoSansCJKtc-Bold;
+    font-size: 12px;
+    letter-spacing: 0.75px;
+
+    }
+  }
+ 
+}
+
+.table-title{
+  position: sticky;
+  top: 0;
+  
+  background: #F4F1EA;
+  border-top: 2px solid #2A2A2A;
+  border-bottom: 2px solid #2A2A2A;
+  font-family: NotoSansCJKtc-Bold;
+  font-size: 18px;
+  font-weight: 600;
+  
+  @include pad{
+    white-space: nowrap;
+    
+    font-size: 12px;
+    color: #2A2A2A;
+    letter-spacing: 0.75px;
+  }
+
+}
+
+.table-waiting{
+  td{
+    color: #2A2A2A;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #D9D9D9;
+  }
+}
+
+.d-md-none{
+  @include pad{
+    display: none;
+  }
+}
+
+.d-none{
+  display: none;
+   @include pad{
+    display: flex;
+  }
+}
+
+.select-pad{
+  
+  display: none;
+   @include pad{
+    display: flex;
+    justify-content: flex-end;
+     
+    position:relative;
+  /* &::after{
+      content:'\25BF';
+      position: absolute;
+      background-color: #fff ;
+      padding: .5rem;
+      top: 0;
+      right: .5rem;
+      transform: translateY(15%);
+      pointer-events:none;
+      font-size: .5rem;
+      
+    } */
+  select{
+    background: #FFFFFF;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
+    border-radius: 20px;
+    width: 24%;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  }
+  
+   
+}
+.overflow-auto{
+  overflow-y:auto;
+  height: 62%;
+  
+  @include pad{
+    height: 60%;
+  }
+}
+
+.mr-1{
+  margin-right: 10px;
+}
+
+.caret-group{
+  display: inline-flex;
+  position: relative;
+}
+
+.fa-caret-up, .fa-caret-down{
+  position: absolute;
+  &:hover{
+    cursor:pointer;
+  }
+}
+
+.fa-caret-up{
+  top: -22px;
+  right: -8px;
+  
+  @include pad{
+  top: -14px;
+  right: -4px;
+    }
+}
+
+.fa-caret-down{
+  top: -9px;
+  right: -8px;
+  
+  @include pad{
+  top: -6px;
+  right: -4px;
+  }
+}
