@@ -26,7 +26,7 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-sans-serif: "NotoSansCJKtc-Bold", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
@@ -11574,6 +11574,17 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #fff;
+}
+
+body {
+  color: #2A2A2A;
+  font-family: NotoSansCJKtc-Bold;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
 .bg {
   background-image: url(https://hexschool.github.io/js-filter/assets/bg.jpg);
   background-position: center;
@@ -11643,7 +11654,6 @@ a {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-family: NotoSansCJKtc-Bold;
   font-weight: 600;
   margin-bottom: 20px;
 }
@@ -11768,7 +11778,6 @@ a {
   width: 15%;
   display: block;
   text-align: center;
-  opacity: .7;
   -webkit-transition: all .15s ease-out;
   -o-transition: all .15s ease-out;
   transition: all .15s ease-out;
@@ -11782,7 +11791,8 @@ a {
 }
 
 .btn-active {
-  opacity: 1;
+  background: #F8D45A;
+  border: 2px solid #F8D45A;
   pointer-events: auto;
   -webkit-transition: all .15s ease-in;
   -o-transition: all .15s ease-in;
@@ -11835,6 +11845,10 @@ a {
   width: 100%;
 }
 
+.table-group thead {
+  text-align: center;
+}
+
 .table-group td, .table-group th {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -11855,6 +11869,11 @@ a {
 
 .table-group tbody tr:hover {
   background-color: #F4F1EA;
+}
+
+.table-group tbody tr > td:first-child {
+  -moz-text-align-last: left;
+       text-align-last: left;
 }
 
 @media (max-width: 767px) {
@@ -11921,7 +11940,7 @@ a {
     /* &::after{
       content:'\25BF';
       position: absolute;
-      background-color: #fff ;
+      background-color: $white ;
       padding: .5rem;
       top: 0;
       right: .5rem;
@@ -11932,7 +11951,7 @@ a {
     } */
   }
   .select-pad select {
-    background: #FFFFFF;
+    background: #fff;
     -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
             box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 20px;
