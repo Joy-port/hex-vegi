@@ -1,6 +1,8 @@
 const url ="https://hexschool.github.io/js-filter-data/data.json";
 const productList = document.querySelector(".show-list");
 
+const btnGroup = document.querySelector(".btn-group");
+const btnCropsType = document.querySelectorAll(".btn-group a");
 const inputTxt = document.querySelector(".input-txt");
 const inputBtn = document.querySelector(".input-btn");
 const resultName = document.querySelector(".result-name");
@@ -8,33 +10,46 @@ const selectList = document.querySelectorAll(".select-group");
 
 const tableSortGroup = document.querySelector(".table-title");
 
-let data ; //原始資料
-let showData = []; //用來放filter 後的結果
 
-//撈取資料
+let data ; 
+let filterData = []; 
+
+//== axios撈取資料 ==//
 function getData(){
   axios.get(url)
   .then(function (response) {
-   data = response.data.filter( item => item.作物名稱); //需要賦予data 資料
-   //renderData(data);
+   data = response.data.filter( item => item.作物名稱); 
+
    init(); //非同步
 });
 }
-//預設渲染畫面
+
+//== 預設渲染畫面 ==//
 function init(){
   productList.innerHTML = `<tr class="table-waiting"><td colspan="7">請輸入並搜尋想比價的作物名稱^＿^</td></tr>`;
-  
+
+  inputBtn.addEventListener('click',searchCrops, false);
+  inputTxt.addEventListener('keyup',searchCropsKey, false);
+  btnGroup.addEventListener('click', filterCropType, false);
+  tableSortGroup.addEventListener('click', sortTableBytitle, false);
+  selectListAll();
+}
+
+//== select pc mobile 兩個下拉選單監聽事件 ==//
+
+function selectListAll(){
+  selectList.forEach(function(item,index){
+    selectList[index].addEventListener("change", changeSelect, false);
+  });
 }
 
 getData();
 
-
-//更新選染畫面使用函式
-
-function renderData(data){
+//== 更新選染畫面使用函式 ==//
+function update(showData){
   
   let str ='';
-  data.forEach(item =>{
+  showData.forEach(item =>{
     let content =`
             <tr>
             <td>${item.作物名稱}</td>
@@ -51,16 +66,10 @@ function renderData(data){
   });
   
   productList.innerHTML = str;
-  selectListAll();
+
 }
 
-//btn type 初步篩選資料
-
-const btnGroup = document.querySelector(".btn-group");
-const btnCropsType = document.querySelectorAll(".btn-group a");
-
-btnGroup.addEventListener('click', filterCropType, false);
-
+//== 按鈕分類篩選資料 ==//
 
 function filterCropType (e){
   e.preventDefault();
@@ -68,60 +77,47 @@ function filterCropType (e){
     return ;
   };
   
-  btnCropsType.forEach(item =>{
+  btnCropsType.forEach(item => {
     item.classList.remove("active");
     e.target.classList.add("active");
   });
  
   let type = e.target.dataset.type;
-  showData = data.filter(function(item ){
-    return type === item.種類代碼;
-  });
+  filterData = data.filter(item => type === item.種類代碼);
   
   resultName.textContent = e.target.textContent;
-  resetSelect();
   
-  renderData(showData);
+  resetSelect();
+  update(filterData);
 }
 
-
-//搜尋資料
-
-inputBtn.addEventListener('click',searchCrops, false);
-inputTxt.addEventListener('keyup',searchCropsKey, false);
+//== 搜尋資料 ==//
 
 function searchCrops (e){
-  //確認點擊位置
-  if(inputTxt.value.trim()=== ""){
-    inputBtn.setAttribute("class","input-btn");
-    return;
-  };
-
-  showData = data.filter(item => {
-    return item.作物名稱.match(inputTxt.value.trim()) 
- });
-  btnCropsType.forEach(item =>{
-    item.classList.remove("active");
-  });
-  
-  resultName.textContent = inputTxt.value.trim();
-  inputTxt.value = "";
-  inputBtn.setAttribute("class","input-btn");
-  resetSelect();
-  
-  if(showData.length === 0){
-    let content = `<tr class="table-waiting"><td colspan="7">查詢不到交易資訊QQ</td></tr>`;
-    productList.innerHTML = content;
-  
+  if(inputTxt.value.trim() !== ""){
+    inputBtn.classList.add("btn-active");
+  }else{
     return ;
   };
 
+  filterData = data.filter(item => item.作物名稱.match(inputTxt.value.trim()));
+  btnCropsType.forEach(item =>item.classList.remove("active") );
   
+  resultName.textContent = inputTxt.value.trim();
+  inputTxt.value = "";
+  inputBtn.classList.remove("btn-active");
+  resetSelect();
+  
+  if(filterData.length === 0){
+    let content = `<tr class="table-waiting"><td colspan="7">查詢不到交易資訊QQ</td></tr>`;
+    productList.innerHTML = content;
+    return ;
+  };
 
-  renderData(showData);
+  update(filterData);
 }
 
-//Enter 搜尋
+//== Enter Keyup 鍵盤搜尋 ==//
 function searchCropsKey (e){
   if(inputTxt.value.trim() ==""){
     return ;
@@ -134,17 +130,9 @@ function searchCropsKey (e){
 
 
 
-//select change 下拉選單 事件監聽
-//selectList.addEventListener("change", changeSelect, false);
-function selectListAll(){
-  selectList.forEach(function(item,index){
-    selectList[index].addEventListener("change", changeSelect, false);
-  });
-}
-
-
+//== select change 下拉選單 ==//
 function changeSelect(e){
-  if(showData.length == 0){
+  if(filterData.length == 0){
   return ;
   };
     switch(e.target.value){
@@ -166,18 +154,13 @@ function changeSelect(e){
     }
 }
 
-//執行sort 函式
+//==  下拉選單 排序 ==//
 function sortChange(e){
-  showData.sort(function(a,b){
-    return a[e]-b[e];
-  });
-  renderData(showData);
+  filterData.sort((a,b) => a[e]-b[e]);
+  update(filterData);
 }
 
-//進階篩選
-
-tableSortGroup.addEventListener('click', sortTableBytitle, false);
-
+//== 進階篩選  表單內排序 ==//
 function sortTableBytitle(e){
   if(e.target.nodeName !== "I"){
     return ;
@@ -186,26 +169,20 @@ function sortTableBytitle(e){
     let sortDirection = e.target.dataset.sort;
     
     if(sortDirection === "up"){
-      showData.sort((a,b)=>{
-       return a[sortTitle] - b[sortTitle];  //內容物需要研究
-      });
+      filterData.sort((a,b)=> b[sortTitle] - a[sortTitle]);
       
     }else if(sortDirection === "down"){
-      showData.sort((a,b)=>{
-    return b[sortTitle] - a[sortTitle];
-  });
+      filterData.sort((a,b)=> a[sortTitle] - b[sortTitle]);
     };
-    
+  
     selectList.forEach(function(item,index){
       selectList[index].value = `依${sortTitle}排序`;
     });
-    renderData(showData);
-    
+    update(filterData);
   };
-  
-  
 }
-//清空selectList
+
+//== 清空 下拉選單 ==//
 function resetSelect(){
   selectList[0].value = "排序篩選";
   selectList[1].value = "排序";
