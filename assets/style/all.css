@@ -11719,7 +11719,6 @@ a {
   background-color: #899E39;
   border: 2px solid #899E39;
   border-radius: 4px;
-  margin-right: 24px;
 }
 
 @media (max-width: 767px) {
@@ -11817,6 +11816,12 @@ a {
   }
 }
 
+@media (max-width: 767px) {
+  .result-group select {
+    display: none;
+  }
+}
+
 .select-group {
   border: 1px solid #9A9A9A;
   border-radius: 4px;
@@ -11889,20 +11894,14 @@ a {
 }
 
 @media (max-width: 767px) {
-  .d-md-none {
+  .d-none {
     display: none;
   }
 }
 
-.d-none {
-  display: none;
-}
-
-@media (max-width: 767px) {
-  .d-none {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
+@media (max-width: 375px) {
+  .d-mobile-none {
+    display: none;
   }
 }
 
