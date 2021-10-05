@@ -25,7 +25,7 @@ current: index
       <div class="result-group">
         <p class="result-title">查看「<span class="result-name"></span>」的比價結果</p>
 
-      <select name="sort select" class="select-group d-md-none">
+      <select name="sort select" class="select-group">
         <option selected disabled>排序篩選</option>
         <option value="依上價排序" data-title="上價">依上價排序</option>
         <option value="依中價排序" data-title="中價">依中價排序</option>
@@ -38,9 +38,8 @@ current: index
         <table class="table-group">
           <thead class="table-title">
             <tr>
-              <th>作物<span class="d-md-none">名稱</span>
-              </th>
-              <th>市場<span class="d-md-none">名稱</span></th>
+              <th>作物<span class="d-mobile-none">名稱</span></th>
+              <th>市場<span class="d-mobile-none">名稱</span></th>
               <th>上價
                 <div class="caret-group">
                   <i data-title="上價" data-sort="up" class="fas fa-caret-up"></i>
@@ -83,7 +82,7 @@ current: index
         </div>
 
 </div>
-    <div class="select-pad d-none">
+    <div class="select-pad">
       <select name="sort select" class="select-group">
         <option selected>排序</option>
         <option value="依上價排序">依上價排序</option>

@@ -131,7 +131,6 @@ a{
   background-color: #899E39;
   border: 2px solid #899E39;
   border-radius: 4px;
-  margin-right: 24px;
   
   @include pad{
     width: 100%;
@@ -204,6 +203,12 @@ a{
     @include pad{
     padding-left: 8px;
   }
+  }
+
+  select{
+    @include pad{
+      display: none;
+    }
   }
 }
 
@@ -278,22 +283,23 @@ a{
   }
 }
 
-.d-md-none{
-  @include pad{
+
+.d-none{
+   @include pad{
     display: none;
   }
 }
 
-.d-none{
-  display: none;
-   @include pad{
-    display: flex;
+.d-mobile-none{
+  @include mobile{
+    display: none;
   }
 }
 
 .select-pad{
   
   display: none;
+
    @include pad{
     display: flex;
     justify-content: flex-end;
